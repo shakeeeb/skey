@@ -1,0 +1,56 @@
+MANDIR  =  /usr/local/man/man8
+DESTDIR =  /usr/local/bin
+RANLIB = "echo"
+
+CFLAGS	=  -g -DUSE_ECHO @crypt@
+CC = @MYCC@
+
+LIB     =  libskey.a
+LIBOBJS =  skeylogin.o skeysubr.o md4.o put.o
+LIBSRCS =  skeylogin.c skeysubr.c md4.c put.c
+
+all:	$(LIB) key keyinit keysh done
+
+what:
+	@echo ""
+	@echo "Please specify the type of system you are compiling on:"
+	@echo ""
+	@echo " bsd             Berkeley 4.x, 386BSD, Aviion DG/UX"
+	@echo " sunos4          Sun SunOS 4.x"
+	@echo " sunos5          Sun SunOS 5.x (Solaris 2.x)"
+	@echo " ultrix          Dec Ultrix 4.1.x"
+	@echo " sysv            AT&T System V and clones"
+	@echo " irix            Silicon Graphic's IRIX"
+	@echo " next            NeXTStep 2.0"
+	@echo " hpux            HP/UX Hewlett-Packard Unix v9.x"
+	@echo ""
+	@echo "Example: make sunos4"
+	@echo ""
+
+setuid:
+	chmod u+s keyinit keysh
+
+install:
+	chmod u+s keyinit keysh
+	mv key $(BIN)
+	mv keyinit $(BIN)
+	mv keysh $(BIN)
+
+key:    skey.c
+	$(CC) -o $@ $(CFLAGS) skey.c $(LIB) $(SYSLIBS)
+
+keyinit: skeyinit.c
+	$(CC) -o $@ $(CFLAGS) skeyinit.c $(LIB) $(SYSLIBS)
+
+keysh:  skeysh.c
+	$(CC) -o $@ $(CFLAGS) skeysh.c $(LIB) $(SYSLIBS)
+
+$(LIB): $(LIBOBJS)
+	ar rv $(LIB) $(LIBOBJS)
+	$(RANLIB) $(LIB)
+
+done:
+	@echo "Make completed."
+
+clean:
+	rm -f key keyinit keysh *.o libskey.a *.bak *.BAK *.s tags
