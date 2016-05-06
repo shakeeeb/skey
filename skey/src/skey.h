@@ -30,18 +30,12 @@ int dflag; // debug level
 #endif
 #endif
 
-#ifdef HAS_TERMIOS
+#ifdef HAVE_TERMIOS_H
 # include <termios.h>
 # include <sys/ioctl.h>
-#ifdef USES_TIOCGETA
-# define TTYSTRUCT termios
-# define stty(fd,buf) ioctl((fd),TIOCSETA,(buf))
-# define gtty(fd,buf) ioctl((fd),TIOCGETA,(buf))
-#else // doesnt use TIOCGETA
 # define TTYSTRUCT termios
 # define stty(fd,buf) ioctl((fd),tcsetattr,(buf))
 # define gtty(fd,buf) ioctl((fd),tcgetattr,(buf))
-#endif
 #else //otherwise it's just sgtty
 # include <sgtty.h>
 # define TTYSTRUCT sgttyb //let me recommit
@@ -49,37 +43,37 @@ int dflag; // debug level
 # define gtty(fd,buf) ioctl((fd),TIOCGETP,(buf))
 #endif
 
-#ifdef HAS_GETOPT
+#ifdef HAVE_GETOPT_H
 # include <getopt.h>
 #endif
 // any solaris thing, danny used shadow. use shadow
-#ifdef HAS_SHADOW
-#ifdef BIG_ENDIAN // its a sparky thing
+#ifdef HAVE_SHADOW_H
+#ifdef WORDS_BIGENDIAN // its a sparky thing
 #define setpriority(x,y,z)      z
 #endif
 #endif
 
-#ifdef HAS_CRYPT
+#ifdef HAVE_LIBCRYPT
 #include <crypt.h>
 #endif
 
-#ifdef HAS_UNISTD
+#ifdef HAVE_UNISTD_H
 #include <unistd.h>
 #endif
 
-#ifdef HAS_SYS_TYPES
+#ifdef HAVE_SYS_TYPES_H
 #include <sys/types.h>
 #endif
 
-#ifdef HAS_CTYPE
+#ifdef HAVE_CTYPE_H
 #include <ctype.h>
 #endif
 
-#ifdef HAS_FCNTL
+#ifdef HAVE_FCNTL_H
 #include <fcntl.h>
 #endif
 
-#ifdef HAS_SYS_STAT
+#ifdef HAVE_SYS_STAT_H
 #include <sys/stat.h>
 #endif
 

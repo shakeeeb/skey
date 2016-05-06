@@ -10,10 +10,10 @@
  *
  * S/KEY misc routines.
  */
-
+#include "config.h"
 #include <stdio.h>
 
-#ifdef HAS_STD_LIB
+#ifdef HAVE_STDLIB_H
 #include <stdlib.h>
 #else
 #include <sys/types.h>
@@ -31,7 +31,7 @@
 #endif
 #include "skey.h"
 
-#ifdef HAS_TERMIOS
+#ifdef HAVE_TERMIOS_H
 struct termios newtty;
 struct termios oldtty;
 #else
@@ -40,7 +40,7 @@ struct sgttyb oldtty;
 struct tchars chars;
 #endif
 
-#ifdef HAS_STD_LIB
+#ifdef HAVE_STDLIB_H
 #include <stdlib.h>
 #endif
 
@@ -72,7 +72,7 @@ char *passwd;	/* Password, any length */
 	char *buf;
 	MDstruct md;
 	unsigned int buflen;
-#ifndef	LITTLE_ENDIAN
+#ifdef WORDS_BIGENDIAN
 	int i;
 	register long tmp;
 #endif
@@ -94,7 +94,7 @@ char *passwd;	/* Password, any length */
 	md.buffer[0] ^= md.buffer[2];
 	md.buffer[1] ^= md.buffer[3];
 
-#ifdef	LITTLE_ENDIAN
+#ifndef	WORDS_BIGENDIAN
 	/* Only works on byte-addressed little-endian machines!! */
 	memcpy(result,(char *)md.buffer,8);
 #else
@@ -122,7 +122,7 @@ void f (x)
 char *x;
 {
 	MDstruct md;
-#ifndef	LITTLE_ENDIAN
+#ifdef	WORDS_BIGENDIAN
 	register long tmp;
 #endif
 
@@ -133,7 +133,7 @@ char *x;
 	md.buffer[0] ^= md.buffer[2];
 	md.buffer[1] ^= md.buffer[3];
 
-#ifdef	LITTLE_ENDIAN
+#ifndef	WORDS_BIGENDIAN
 	/* Only works on byte-addressed little-endian machines!! */
 	memcpy(x,(char *)md.buffer,8);
 
@@ -215,14 +215,14 @@ set_term ()
 echo_off ()
 {
 
-#ifdef HAS_TERMIOS
+#ifdef HAVE_TERMIOS_H
     newtty.c_lflag &= ~(ICANON | ECHO | ECHONL);
 #else
     newtty.sg_flags |= CBREAK;
     newtty.sg_flags &= ~ECHO;
 #endif
 
-#ifdef HAS_TERMIOS
+#ifdef HAVE_TERMIOS_H
     newtty.c_cc[VMIN] = 1;
     newtty.c_cc[VTIME] = 0;
     newtty.c_cc[VINTR] = 3;
@@ -239,7 +239,7 @@ unset_term ()
 {
     stty (fileno (stdin), &oldtty);
 
-#ifndef HAS_TERMIOS
+#ifndef HAVE_TERMIOS_H
     ioctl(fileno(stdin), TIOCSETC, &chars);
 #endif
 }

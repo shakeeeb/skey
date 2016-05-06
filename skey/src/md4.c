@@ -39,7 +39,7 @@
 #include "config.h"
 //#include "skey.h"
 
-#ifdef LITTLE_ENDIAN
+#ifndef WORDS_BIGENDIAN
 #define LOWBYTEFIRST TRUE	/* Low order bytes are first in memory */
 #else			/* Almost all other machines are big-endian */
 #define	LOWBYTEFIRST FALSE // Big endian machines -- sparky
@@ -50,6 +50,13 @@
 #include <stdio.h>
 #include "md4.h"
 #include "skey.h"
+
+#ifndef HAVE_INTTYPES_H
+#include<inttypes.h>
+#else
+#include<stdint.h>
+#endif
+
 extern int dflag;
 
 /* Compile-time declarations of MD4 ``magic constants'' */

@@ -17,22 +17,22 @@
 
 #include "skey.h"
 
-#ifdef HAS_SYSTEMINFO
+#ifdef HAVE_SYS_SYSTEMINFO_H
 #include <sys/systeminfo.h>
 #endif
-#ifdef HAS_UNISTD
+#ifdef HAVE_UNISTD_H
 #include <unistd.h>
 #endif
-#ifdef HAS_SHADOW
+#ifdef HAVE_SHADOW_H
 #include <shadow.h>
 //#include "sysv_shadow.h"
 #endif
 
-#ifdef HAS_STD_LIB
+#ifdef HAVE_STDLIB_H
 #include<stdlib.h>
 #endif
 
-#ifdef HAS_CRYPT
+#ifdef HAVE_CRYPT_H
 #include<crypt.h>
 #endif
 
@@ -277,9 +277,9 @@ main (argc, argv)
   exit (1);
 }
 
-#ifdef HAS_UNISTD
-#ifdef HAS_SHADOW
-#ifdef HAS_SYSTEMINFO
+#ifdef HAVE_UNISTD_H
+#ifdef HAVE_SHADOW_H
+#ifdef HAVE_SYSTEMINFO_H
 int gethostname (name, len)
 char *name;
 int len;
