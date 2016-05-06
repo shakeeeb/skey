@@ -33,7 +33,6 @@ int dflag; // debug level
 #if defined(HAVE_TERMIO_H)
  	#include <termio.h>
 	 	#ifdef HAVE_TERMIOS_H
- 			#warning "Including TERMIOS H"
  			#include <termios.h>
 	 	#endif
  	#define TTYSTRUCT termio
