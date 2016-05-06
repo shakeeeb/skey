@@ -31,6 +31,8 @@ AC_TYPE_SIGNAL
 AC_FUNC_STAT
 AC_FUNC_STRFTIME
 AC_CHECK_FUNCS([dup2 gethostname getpass getspnam isascii memset setenv strchr sysinfo])
+AC_CHECK_FUNC(crypt, , AC_CHECK_LIB(crypt, crypt, ,
+	[echo "cannot find crypt anywhere"; exit 1]))
 AC_CONFIG_FILES([Makefile
                  man/Makefile
                  src/Makefile])
