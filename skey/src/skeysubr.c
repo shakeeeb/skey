@@ -31,14 +31,14 @@
 #endif
 #include "skey.h"
 
-#ifdef HAVE_TERMIOS_H
-struct termios newtty;
-struct termios oldtty;
-#else
-struct sgttyb newtty;
-struct sgttyb oldtty;
-struct tchars chars;
-#endif
+// #ifdef HAVE_TERMIOS_H
+// struct termios newtty;
+// struct termios oldtty;
+// #else
+// struct sgttyb newtty;
+// struct sgttyb oldtty;
+// struct tchars chars;
+// #endif
 
 #ifdef HAVE_STDLIB_H
 #include <stdlib.h>

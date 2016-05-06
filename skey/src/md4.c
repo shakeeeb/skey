@@ -86,7 +86,7 @@ extern int dflag;
 
 /* Compile-time macro declarations for MD4.
  * Note: The ``rot'' operator uses the variable ``tmp''.
- * It assumes tmp is declared as unsigned int, so that the >>
+ * It assumes tmp is declared as uint32_t, so that the >>
  * operator will shift in zeros rather than extending the sign bit.
  */
 #define	f(X,Y,Z)             ((X&Y) | ((~X)&Z))
@@ -97,7 +97,7 @@ extern int dflag;
 #define gg(A,B,C,D,i,s)      A = rot((A + g(B,C,D) + X[i] + C2),s)
 #define hh(A,B,C,D,i,s)      A = rot((A + h(B,C,D) + X[i] + C3),s)
 
-void MDreverse __ARGS((unsigned int *X));
+void MDreverse __ARGS((uint32_t *X));
 
 /* MDprint(MDp)
  * Print message digest buffer MDp as 32 hexadecimal digits.
@@ -148,11 +148,11 @@ MDptr MDp;
 	       *X++ = ((t & 0xFF00FF00) >> 8) | ((t & 0x00FF00FF) << 8); }
 void
 MDreverse(X)
-unsigned int *X;
+uint32_t *X;
 {
 	debug1("entering function\n");
 	debug3("Args:%p\n", X);
-	register unsigned int t;
+	register uint32_t t;
 
 	revx;
 	revx;
@@ -183,11 +183,11 @@ unsigned int *X;
 static void
 MDblock(MDp,X)
 MDptr MDp;
-unsigned int *X;
+uint32_t *X;
 {
 	debug1("entering function\n");
 	debug3("Args:%p\n", MDp);
-	register unsigned int tmp, A, B, C, D;
+	register uint32_t tmp, A, B, C, D;
 
 #if LOWBYTEFIRST == FALSE
 	MDreverse(X);
@@ -270,10 +270,10 @@ void
 MDupdate(MDp,X,count)
 MDptr MDp;
 unsigned char *X;
-unsigned int count;
+uint32_t count;
 {
 	int i,bit,byte,mask;
-	unsigned int tmp;
+	uint32_t tmp;
 	unsigned char XX[64];
 	unsigned char *p;
 
@@ -298,7 +298,7 @@ unsigned int count;
 	/* Process data */
 	if(count == 512){
 		/* Full block of data to handle */
-		MDblock(MDp,(unsigned int *)X);
+		MDblock(MDp,(uint32_t *)X);
 	} else if(count > 512){
 		/* Check for count too large */
 		printf("\nError: MDupdate called with illegal count value %ld.",count);
@@ -321,15 +321,15 @@ unsigned int count;
 		if(byte <= 55){
 			for(i=0;i<8;i++)
 				XX[56+i] = MDp->count[i];
-			MDblock(MDp,(unsigned int *)XX);
+			MDblock(MDp,(uint32_t *)XX);
 		} else {
 			/* need to do two blocks to finish up */
-			MDblock(MDp,(unsigned int *)XX);
+			MDblock(MDp,(uint32_t *)XX);
 			for(i=0;i<56;i++)
 				XX[i] = 0;
 			for(i=0;i<8;i++)
 				XX[56+i] = MDp->count[i];
-			MDblock(MDp,(unsigned int *)XX);
+			MDblock(MDp,(uint32_t *)XX);
 		}
 	/* Set flag saying we're done with MD computation */
 	MDp->done = 1;
