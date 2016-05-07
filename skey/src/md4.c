@@ -97,7 +97,7 @@ extern int dflag;
 #define gg(A,B,C,D,i,s)      A = rot((A + g(B,C,D) + X[i] + C2),s)
 #define hh(A,B,C,D,i,s)      A = rot((A + h(B,C,D) + X[i] + C3),s)
 
-void MDreverse(uint32_t *X);
+void MDreverse __ARGS((uint32_t *X));
 
 /* MDprint(MDp)
  * Print message digest buffer MDp as 32 hexadecimal digits.
@@ -106,13 +106,14 @@ void MDreverse(uint32_t *X);
  * This is a user-callable routine.
  */
 void
-MDprint(MDptr MDp)
+MDprint(MDp)
+MDptr MDp;
 {
 	int i,j;
 
 	for(i=0;i<4;i++)
 		for(j=0;j<32;j=j+8)
-			printf("%02lx",(long unsigned int)((MDp->buffer[i]>>j) & 0xFF));
+			printf("%02lx",(long unsigned)((MDp->buffer[i]>>j) & 0xFF));
 }
 
 /* MDbegin(MDp)
@@ -120,7 +121,8 @@ MDprint(MDptr MDp)
  * This is a user-callable routine.
  */
 void
-MDbegin(MDPtr MDp)
+MDbegin(MDp)
+MDptr MDp;
 {
 	debug1("entering function\n");
 	debug2("Args:%p\n", MDp);
@@ -145,7 +147,8 @@ MDbegin(MDPtr MDp)
 #define revx { t = (*X << 16) | (*X >> 16); \
 	       *X++ = ((t & 0xFF00FF00) >> 8) | ((t & 0x00FF00FF) << 8); }
 void
-MDreverse(unsigned int* X)
+MDreverse(X)
+unsigned int *X;
 {
 	debug1("entering function\n");
 	debug3("Args:%p\n", X);
@@ -178,7 +181,9 @@ MDreverse(unsigned int* X)
  * This routine is not user-callable.
  */
 static void
-MDblock(MDPtr MDp, unsigned int* X)
+MDblock(MDp,X)
+MDptr MDp;
+unsigned int *X;
 {
 	debug1("entering function\n");
 	debug3("Args:%p\n", MDp);
@@ -262,7 +267,10 @@ MDblock(MDPtr MDp, unsigned int* X)
  * 0 can be given as a ``courtesy close'' to force termination if desired.
  */
 void
-MDupdate(MDPtr MDp,unsigned char* X,unsigned int count)
+MDupdate(MDp,X,count)
+MDptr MDp;
+unsigned char *X;
+unsigned int count;
 {
 	int i,bit,byte,mask;
 	unsigned int tmp;
