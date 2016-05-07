@@ -1,6 +1,7 @@
 AM_CFLAGS = 
 AM_LDFLAGS =
 AC_PROG_RANLIB = "echo"
+TESTS = tester.sh
 
 noinst_LIBRARIES = libskey.a
 libskey_a_SOURCES = skeylogin.c skeysubr.c md4.c put.c
