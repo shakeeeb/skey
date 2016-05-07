@@ -29,7 +29,7 @@ typedef struct {
  * Input: MD -- an MDptr
  * Initialize the MDstruct prepatory to doing a message digest computation.
  */
-extern void MDbegin __ARGS(MDptr MDp);
+extern void MDbegin(MDptr MDp);
 
 /* MDupdate(MD,X,count)
  * Input: MD -- an MDptr
