@@ -1,10 +1,16 @@
-/* 
+/*
  *
  * md4.h -- Header file for implementation of MD4 Message Digest Algorithm
  * Updated: 2/13/90 by Ronald L. Rivest
  * (C) 1990 RSA Data Security, Inc.
  * Reformatted and de-linted - 2/12/91 Phil Karn
  */
+#include "config.h"
+#ifdef HAVE_INTTYPES_H
+#include<inttypes.h>
+#else
+#include<stdint.h>
+#endif
 
 #ifdef  __STDC__
 #define __ARGS(X) X     /* For ANSI C */
@@ -14,9 +20,9 @@
 
 /* MDstruct is the data structure for a message digest computation. */
 typedef struct {
-	unsigned long buffer[4];/* Holds 4-word result of MD computation */
-	unsigned char count[8];	/* Number of bits processed so far */
-	unsigned int done;	/* Nonzero means MD computation finished */
+	uint64_t buffer[4];/* Holds 4-word result of MD computation */
+	uint8_t count[8];	/* Number of bits processed so far */
+	uint32_t done;	/* Nonzero means MD computation finished */
 } MDstruct, *MDptr;
 
 /* MDbegin(MD)
@@ -28,7 +34,7 @@ extern void MDbegin __ARGS((MDptr MDp));
 /* MDupdate(MD,X,count)
  * Input: MD -- an MDptr
  *        X -- a pointer to an array of unsigned characters.
- *        count -- the number of bits of X to use (an unsigned int).
+ *        count -- the number of bits of X to use (an uint32_t).
  * Updates MD using the first ``count'' bits of X.
  * The array pointed to by X is not modified.
  * If count is not a multiple of 8, MDupdate uses high bits of last byte.
@@ -37,7 +43,7 @@ extern void MDbegin __ARGS((MDptr MDp));
  * every MD computation should end with one call to MDupdate with a
  * count less than 512.  Zero is OK for a count.
  */
-extern void MDupdate __ARGS((MDptr MDp,unsigned char *X,unsigned int count));
+extern void MDupdate __ARGS((MDptr MDp,uint8_t *X,uint32_t count));
 
 /* MDprint(MD)
  * Input: MD -- an MDptr
