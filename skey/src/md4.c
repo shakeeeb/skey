@@ -97,7 +97,7 @@ extern int dflag;
 #define gg(A,B,C,D,i,s)      A = rot((A + g(B,C,D) + X[i] + C2),s)
 #define hh(A,B,C,D,i,s)      A = rot((A + h(B,C,D) + X[i] + C3),s)
 
-void MDreverse((uint32_t *X));
+void MDreverse(uint32_t *X);
 
 /* MDprint(MDp)
  * Print message digest buffer MDp as 32 hexadecimal digits.
@@ -263,9 +263,6 @@ MDblock(MDPtr MDp, unsigned int* X)
  */
 void
 MDupdate(MDPtr MDp,unsigned char* X,unsigned int count)
-MDptr MDp;
-unsigned char *X;
-unsigned int count;
 {
 	int i,bit,byte,mask;
 	unsigned int tmp;
