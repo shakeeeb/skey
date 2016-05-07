@@ -113,7 +113,7 @@ MDptr MDp;
 
 	for(i=0;i<4;i++)
 		for(j=0;j<32;j=j+8)
-			printf("%02lx",(MDp->buffer[i]>>j) & 0xFF);
+			printf("%02lx",(long unsigned int)((MDp->buffer[i]>>j) & 0xFF));
 }
 
 /* MDbegin(MDp)
@@ -301,7 +301,7 @@ unsigned int count;
 		MDblock(MDp,(uint32_t *)X);
 	} else if(count > 512){
 		/* Check for count too large */
-		printf("\nError: MDupdate called with illegal count value %ld.",count);
+		printf("\nError: MDupdate called with illegal count value %u.",count);
 		return;
 	} else {
 		/* partial block -- must be last block so finish up
