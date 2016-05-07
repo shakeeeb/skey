@@ -165,7 +165,10 @@ main (argc, argv)
       if (i >= 2)
 	exit (1);
       printf ("Enter sequence count from 1 to 10000: ");
-      fgets (tmp, sizeof (tmp), stdin);
+      if(fgets (tmp, sizeof (tmp), stdin) == null){
+        printf("error, fgets returned null");
+      }
+
       n = atoi (tmp);
       if (n > 0 && n < 10000)
 	break;		/* Valid range */
@@ -177,7 +180,9 @@ main (argc, argv)
   {
     printf ("Enter new key [default %s]: ", defaultseed);
     fflush (stdout);
-    fgets (seed, sizeof (seed), stdin);
+    if(fgets (seed, sizeof (seed), stdin) == null){
+      printf("error, fgets returned null");
+    }
     rip (seed);
     if (strlen (seed) > 16)
     {
@@ -194,7 +199,9 @@ main (argc, argv)
 	exit (1);
 
       printf ("s/key %d %s\ns/key access password: ", n, seed);
-      fgets (tmp, sizeof (tmp), stdin);
+      if(fgets (tmp, sizeof (tmp), stdin) == null){
+        printf("error, fgets returned null");
+      }
       rip (tmp);
       backspace (tmp);
 
