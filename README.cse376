@@ -1,13 +1,26 @@
 to run this program
-please do autoreconf -i on Centos A
-please make clean before compiling on any system
-afterwards, please run ./runscript.sh instead of doing configure && make
-./runscript will configure, and make install
-afterwards cd ../..
-and cd into build/bin-- the binaries will have been installed into the build directory.
+./config-skey.sh
+and then, make clean to clean things up
+afterwards,
+make-- and the makefile will build it for Solaris, CentOS, and FreeBSD
+it will compile and run on solaris, CentOS and FreeBSD
+
+definitions are moved-- config-skey.sh generates a config.h file that includes feature specific includes
+ie HAS_CRYPT, or HAS_UNISTD
+
+the same config-skey.sh rewrites the makefile.tmpl and generates a functional makefile
+all ifdefs are feature specific
+
 three levels of debugging work; they're not pretty, but they work.
 
 -l will write to a logging file
 
 -h will print the usage statement for key
 
+the makefile is generated, but INSTPATH and hasnt been implemented YET
+
+skey produces the same output on both CentOS and Solaris, but not FreeBSD
+
+Key compiles on ubuntu, skeyinit doesnt compile on ubuntu
+
+WORKS ON OPENINDIANA
