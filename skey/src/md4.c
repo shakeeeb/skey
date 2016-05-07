@@ -148,7 +148,7 @@ MDptr MDp;
 	       *X++ = ((t & 0xFF00FF00) >> 8) | ((t & 0x00FF00FF) << 8); }
 void
 MDreverse(X)
-uint32_t *X;
+unsigned int *X;
 {
 	debug1("entering function\n");
 	debug3("Args:%p\n", X);
@@ -183,11 +183,11 @@ uint32_t *X;
 static void
 MDblock(MDp,X)
 MDptr MDp;
-uint32_t *X;
+unsigned int *X;
 {
 	debug1("entering function\n");
 	debug3("Args:%p\n", MDp);
-	register uint32_t tmp, A, B, C, D;
+	register unsigned int tmp, A, B, C, D;
 
 #if LOWBYTEFIRST == FALSE
 	MDreverse(X);
@@ -269,11 +269,11 @@ uint32_t *X;
 void
 MDupdate(MDp,X,count)
 MDptr MDp;
-uint8_t *X;
-uint32_t count;
+unsigned char *X;
+unsigned int count;
 {
 	int i,bit,byte,mask;
-	uint32_t tmp;
+	unsigned int tmp;
 	unsigned char XX[64];
 	unsigned char *p;
 
