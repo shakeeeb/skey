@@ -190,7 +190,9 @@ int n;
     echo_off ();
 #endif
 
-    fgets (buf, n, stdin);
+    if(fgets(buf, n, stdin) == NULL){
+			printf("fgets returned null");
+		}
 
     rip (buf);
 
