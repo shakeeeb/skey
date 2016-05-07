@@ -165,7 +165,7 @@ main (argc, argv)
       if (i >= 2)
 	exit (1);
       printf ("Enter sequence count from 1 to 10000: ");
-      if(fgets (tmp, sizeof (tmp), stdin) == null){
+      if(fgets (tmp, sizeof (tmp), stdin) == NULL){
         printf("error, fgets returned null");
       }
 
@@ -180,7 +180,7 @@ main (argc, argv)
   {
     printf ("Enter new key [default %s]: ", defaultseed);
     fflush (stdout);
-    if(fgets (seed, sizeof (seed), stdin) == null){
+    if(fgets (seed, sizeof (seed), stdin) == NULL){
       printf("error, fgets returned null");
     }
     rip (seed);
@@ -199,7 +199,7 @@ main (argc, argv)
 	exit (1);
 
       printf ("s/key %d %s\ns/key access password: ", n, seed);
-      if(fgets (tmp, sizeof (tmp), stdin) == null){
+      if(fgets (tmp, sizeof (tmp), stdin) == NULL){
         printf("error, fgets returned null");
       }
       rip (tmp);
