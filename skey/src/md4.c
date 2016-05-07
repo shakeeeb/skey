@@ -121,8 +121,7 @@ MDptr MDp;
  * This is a user-callable routine.
  */
 void
-MDbegin(MDp)
-MDptr MDp;
+MDbegin(MDPtr MDp)
 {
 	debug1("entering function\n");
 	debug2("Args:%p\n", MDp);
