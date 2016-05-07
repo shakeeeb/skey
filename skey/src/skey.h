@@ -81,7 +81,7 @@ struct TTYSTRUCT oldtty;
 #endif
 #endif
 
-#ifdef HAVE_LIBCRYPT
+#ifdef HAVE_CRYPT_H // libcrypt doenst necc crypt.h
 #include <crypt.h>
 #endif
 
