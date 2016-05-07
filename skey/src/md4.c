@@ -51,7 +51,7 @@
 #include "md4.h"
 #include "skey.h"
 
-#ifndef HAVE_INTTYPES_H
+#ifdef HAVE_INTTYPES_H
 #include<inttypes.h>
 #else
 #include<stdint.h>
@@ -269,7 +269,7 @@ uint32_t *X;
 void
 MDupdate(MDp,X,count)
 MDptr MDp;
-unsigned char *X;
+uint8_t *X;
 uint32_t count;
 {
 	int i,bit,byte,mask;
