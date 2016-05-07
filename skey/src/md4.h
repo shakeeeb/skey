@@ -29,12 +29,12 @@ typedef struct {
  * Input: MD -- an MDptr
  * Initialize the MDstruct prepatory to doing a message digest computation.
  */
-extern void MDbegin(MDptr MDp);
+extern void MDbegin __ARGS((MDptr MDp));
 
 /* MDupdate(MD,X,count)
  * Input: MD -- an MDptr
  *        X -- a pointer to an array of unsigned characters.
- *        count -- the number of bits of X to use (an unsigned int).
+ *        count -- the number of bits of X to use (an uint32_t).
  * Updates MD using the first ``count'' bits of X.
  * The array pointed to by X is not modified.
  * If count is not a multiple of 8, MDupdate uses high bits of last byte.
