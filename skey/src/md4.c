@@ -106,8 +106,7 @@ void MDreverse __ARGS((uint32_t *X));
  * This is a user-callable routine.
  */
 void
-MDprint(MDp)
-MDptr MDp;
+MDprint(MDptr MDp)
 {
 	int i,j;
 
@@ -121,8 +120,7 @@ MDptr MDp;
  * This is a user-callable routine.
  */
 void
-MDbegin(MDp)
-MDptr MDp;
+MDbegin(MDPtr MDp)
 {
 	debug1("entering function\n");
 	debug2("Args:%p\n", MDp);
@@ -147,8 +145,7 @@ MDptr MDp;
 #define revx { t = (*X << 16) | (*X >> 16); \
 	       *X++ = ((t & 0xFF00FF00) >> 8) | ((t & 0x00FF00FF) << 8); }
 void
-MDreverse(X)
-unsigned int *X;
+MDreverse(unsigned int* X)
 {
 	debug1("entering function\n");
 	debug3("Args:%p\n", X);
@@ -181,9 +178,7 @@ unsigned int *X;
  * This routine is not user-callable.
  */
 static void
-MDblock(MDp,X)
-MDptr MDp;
-unsigned int *X;
+MDblock(MDPtr MDp, unsigned int* X)
 {
 	debug1("entering function\n");
 	debug3("Args:%p\n", MDp);
@@ -267,10 +262,7 @@ unsigned int *X;
  * 0 can be given as a ``courtesy close'' to force termination if desired.
  */
 void
-MDupdate(MDp,X,count)
-MDptr MDp;
-unsigned char *X;
-unsigned int count;
+MDupdate(MDPtr MDp,unsigned char* X,unsigned int count)
 {
 	int i,bit,byte,mask;
 	unsigned int tmp;
