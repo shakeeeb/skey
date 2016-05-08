@@ -20,8 +20,9 @@ char pathbuf[128] = "PATH=:/usr/ucb:/bin:/usr/bin";
 char *cleanenv[] = { userbuf, homebuf, shellbuf, pathbuf, 0, 0 };
 char *shell = "/bin/csh";
 
+#ifndef HAVE_GETENV
 char *getenv();
-
+#endif
 extern char **environ;
 struct passwd *pwd;
 
@@ -93,6 +94,7 @@ main (argc, argv)
   return 7;
 }
 
+#ifndef HAVE_SETENV
 setenv (ename, eval, buf)
 char *ename, *eval, *buf;
 {
@@ -112,7 +114,9 @@ char *ename, *eval, *buf;
        }
    }
 }
+#endif
 
+#ifndef HAVE_GETENV
 char *getenv(ename)
 char *ename;
 {
@@ -127,3 +131,4 @@ char *ename;
   }
   return ((char *)0);
 }
+#endif
