@@ -1,15 +1,12 @@
-to run this program
-./config-skey.sh
-and then, make clean to clean things up
-afterwards,
-make-- and the makefile will build it for Solaris, CentOS, and FreeBSD
-it will compile and run on solaris, CentOS and FreeBSD
+to run this program,
+in the hw4-smsaleh/skey directory
+please make clean
+then, use ./runscript.sh instead of configure && make 
 
-definitions are moved-- config-skey.sh generates a config.h file that includes feature specific includes
-ie HAS_CRYPT, or HAS_UNISTD
+this will install it in $HOME/build
+please cd there to test the program
 
-the same config-skey.sh rewrites the makefile.tmpl and generates a functional makefile
-all ifdefs are feature specific
+aslo, if you cd into src, and use make check, make check will work and make your life easier
 
 three levels of debugging work; they're not pretty, but they work.
 
@@ -17,10 +14,12 @@ three levels of debugging work; they're not pretty, but they work.
 
 -h will print the usage statement for key
 
-the makefile is generated, but INSTPATH and hasnt been implemented YET
+-v doesnt work. -e doesnt work
 
-skey produces the same output on both CentOS and Solaris, but not FreeBSD
+compiles and runs on all systems
 
-Key compiles on ubuntu, skeyinit doesnt compile on ubuntu
+make install works
 
-WORKS ON OPENINDIANA
+make dist makes a tarball
+
+
