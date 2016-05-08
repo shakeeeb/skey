@@ -23,7 +23,7 @@ char *shell = "/bin/csh";
 #ifndef HAVE_GETENV
 char *getenv();
 #endif
-extern char **environ;
+char **environ;
 struct passwd *pwd;
 
 main (argc, argv)
