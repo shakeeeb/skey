@@ -1,5 +1,7 @@
 to run this program,
 in the hw4-smsaleh/skey directory
+autoreconf -i in centOS
+then, 
 please make clean
 then, use ./runscript.sh instead of configure && make 
 
@@ -22,4 +24,11 @@ make install works
 
 make dist makes a tarball
 
+also
 
+i never changed the K&R C headers into ANSI headers,
+so if it doestn compile with WALL WERROR, its because of that
+
+also, if it doesnt have aclocal.m4, it may not work
+
+so please, check for aclocal.m4. if it needs it, please provide it by using aclocal.
